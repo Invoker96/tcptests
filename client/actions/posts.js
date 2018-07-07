@@ -1,6 +1,8 @@
+import constants from './../data/constant';
+
 export function increment(index) {
-    return {
-      type: "INCREMENT_LIKES",
-      index
-    };
-  }
+  return {
+    type: constants.INCREMENT_LIKES,
+    index
+  };
+}
