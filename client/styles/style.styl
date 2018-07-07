@@ -5,6 +5,14 @@
 body
   background offwhite
 
+.gallery-intro
+  width 95%
+  font-size 1.5rem
+  margin 4rem auto
+  text-align justify
+  font-style oblique
+  color blue
+
 .photo-grid
   display flex
   flex-wrap wrap
@@ -99,10 +107,23 @@ body
 /*  
   Buttons  
 */
+.show-gallery
+  margin-left 84%
+  font-style oblique
+  font-size 2rem
+  color blue
+  transition all 0.2s
+  &:hover, &:focus
+    margin-left 70%
+    text-decoration underline
+    font-size 4rem
+    border-color blue
+    outline 0
+
 .show 
   color blue
   transition all 0.2s
-  cursor: pointer
+  cursor pointer
   &:hover, &:focus
     border-color blue
     outline 0
