@@ -11,7 +11,7 @@ const Single = props => {
 
   return (
     <div className="single-photo">
-      <Photo {...props} i={i} post={post} />
+      <Photo comments={comments} i={i} post={post} />
       <Comments
         postComments={postComments}
         removeComment={removeComment}

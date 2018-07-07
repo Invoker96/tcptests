@@ -1,7 +1,6 @@
 import React from "react";
 
-const Comment = ({ postId, comment, i, removeComment }) => {
-  console.log(postId)
+const Comment = ({ postId, comment, i, removeComment, top }) => {
   return (
     <div className="comment" key={i}>
       <p>
