@@ -1,15 +1,17 @@
+import C from "../data/constants"
+
 function postComments(state = [], action) {
   switch (action.type) {
-    case "ADD_COMMENT":
+    case C.ADD_COMMENT:
       return [
         {
-          user: action.author,
-          text: action.comment
+          user: action.payload.author,
+          text: action.payload.comment
         },
         ...state
       ];
-    case "REMOVE_COMMENT":
-      return [...state.slice(0, action.i), ...state.slice(action.i + 1)];
+    case C.REMOVE_COMMENT:
+      return [...state.slice(0, action.payload.index), ...state.slice(action.payload.index + 1)];
     default:
       return state;
   }
@@ -17,10 +19,10 @@ function postComments(state = [], action) {
 }
 
 function comments(state = [], action) {
-  if (typeof action.postId !== "undefined") {
+  if (action.payload) {
     return {
       ...state,
-      [action.postId]: postComments(state[action.postId], action)
+      [action.payload.postId]: postComments(state[action.payload.postId], action)
     };
   }
   return state;

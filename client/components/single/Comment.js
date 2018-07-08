@@ -12,6 +12,12 @@ const Comment = ({ postId, comment, i, removeComment, top }) => {
         >
           &times;
         </button>
+        <button
+          className="edit-comment"
+          onClick={() => editComment(postId, i)}
+        >
+          &#x270f;
+        </button>
       </p>
     </div>
   );

@@ -18,17 +18,34 @@ class Comments extends React.Component {
     this.handleChangeAuthor = e => {
       this.setState({
         author: e.target.value
-      })
+      });
     };
     this.handleChangeComment = e => {
       this.setState({
         comment: e.target.value
-      })};
+      });
+    };
     this.handleSubmit = e => {
       e.preventDefault();
-      this.props.addComment(this.props.postId, this.state.author, this.state.comment);
-      console.log(this.state)
+      this.props.addComment(
+        this.props.postId,
+        this.state.author,
+        this.state.comment
+      );
+      console.log(this.state);
       e.target.reset();
+    };
+    this.handleUpdate = (e, postId, i) => {
+      const target = e.target.parentNode.children;
+      const form =
+        e.target.parentNode.parentNode.parentNode.children["submitComments"];
+        form["author"].value=target["user"].textContent;
+        form["comment"].value=target["comment"].textContent;
+        this.setState({
+          author: target["user"].textContent,
+          comment: target["comment"].textContent
+        });
+        this.props.removeComment(postId, i)
     };
   }
 
@@ -45,6 +62,8 @@ class Comments extends React.Component {
                 postId={this.props.postId}
                 addComment={this.props.addComment}
                 removeComment={this.props.removeComment}
+                editComment={this.props.editComment}
+                handleUpdate={this.handleUpdate}
               />
             );
           } else {
@@ -56,16 +75,29 @@ class Comments extends React.Component {
                 postId={this.props.postId}
                 addComment={this.props.addComment}
                 removeComment={this.props.removeComment}
+                editComment={this.props.editComment}
+                handleUpdate={this.handleUpdate}
               />
             );
           }
         })}
         <form
           className="comment-form"
+          name="submitComments"
           onSubmit={this.handleSubmit}
         >
-          <input type="text" onChange={this.handleChangeAuthor} placeholder="author" />
-          <input type="text" onChange={this.handleChangeComment} placeholder="comment" />
+          <input
+            type="text"
+            onChange={this.handleChangeAuthor}
+            name="author"
+            placeholder="author"
+          />
+          <input
+            type="text"
+            onChange={this.handleChangeComment}
+            name="comment"
+            placeholder="comment"
+          />
           <input type="submit" hidden />
         </form>
         <More
