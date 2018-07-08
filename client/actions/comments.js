@@ -1,22 +1,16 @@
-import C from "../data/constants";
-
-export function addComment(postId, author, comment) {
-  return {
-    type: C.ADD_COMMENT,
-    payload: {
-      postId,
-      author,
-      comment
-    }
-  };
+export function addComment(state, payload) {
+  return [
+    {
+      user: payload.author,
+      text: payload.comment
+    },
+    ...state
+  ];
 }
 
-export function removeComment(postId, index) {
-  return {
-    type: C.REMOVE_COMMENT,
-    payload: {
-      index,
-      postId
-    }
-  };
+export function deleteComment(state, payload) {
+  return [
+    ...state.slice(0, payload.index),
+    ...state.slice(payload.index + 1)
+  ];
 }
