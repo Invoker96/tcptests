@@ -6,17 +6,29 @@ import More from "./More";
 class Comments extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { top: true };
+    this.state = {
+      top: true,
+      author: "",
+      comment: ""
+    };
     this.handleClick = e => {
       e.preventDefault();
       this.setState({ top: !this.state.top });
     };
+    this.handleChangeAuthor = e => {
+      this.setState({
+        author: e.target.value
+      })
+    };
+    this.handleChangeComment = e => {
+      this.setState({
+        comment: e.target.value
+      })};
     this.handleSubmit = e => {
       e.preventDefault();
-      const author = this.refs.author.value;
-      const comment = this.refs.comment.value;
-      this.props.addComment(this.props.postId, author, comment);
-      this.refs.commentForm.reset();
+      this.props.addComment(this.props.postId, this.state.author, this.state.comment);
+      console.log(this.state)
+      e.target.reset();
     };
   }
 
@@ -49,12 +61,11 @@ class Comments extends React.Component {
           }
         })}
         <form
-          ref="commentForm"
           className="comment-form"
           onSubmit={this.handleSubmit}
         >
-          <input type="text" ref="author" placeholder="author" />
-          <input type="text" ref="comment" placeholder="comment" />
+          <input type="text" onChange={this.handleChangeAuthor} placeholder="author" />
+          <input type="text" onChange={this.handleChangeComment} placeholder="comment" />
           <input type="submit" hidden />
         </form>
         <More
