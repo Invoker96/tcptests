@@ -1,16 +1,22 @@
+import C from "../data/constants";
+
 export function addComment(postId, author, comment) {
   return {
-    type: "ADD_COMMENT",
-    postId,
-    author,
-    comment
+    type: C.ADD_COMMENT,
+    payload: {
+      postId,
+      author,
+      comment
+    }
   };
 }
 
-export function removeComment(postId, i) {
+export function removeComment(postId, index) {
   return {
-    type: "REMOVE_COMMENT",
-    i,
-    postId
+    type: C.REMOVE_COMMENT,
+    payload: {
+      index,
+      postId
+    }
   };
 }
