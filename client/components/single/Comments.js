@@ -1,15 +1,16 @@
 import React from "react";
 import Comment from "./Comment";
 import TopComments from "./TopComments";
+import More from "./More";
 
 class Comments extends React.Component {
   constructor(props) {
     super(props);
     this.state = { top: true };
     this.handleClick = e => {
-      e.preventDefault()
-      this.setState({top: !this.state.top})
-    }
+      e.preventDefault();
+      this.setState({ top: !this.state.top });
+    };
     this.handleSubmit = e => {
       e.preventDefault();
       const author = this.refs.author.value;
@@ -33,7 +34,7 @@ class Comments extends React.Component {
                 addComment={this.props.addComment}
                 removeComment={this.props.removeComment}
               />
-            )
+            );
           } else {
             return (
               <Comment
@@ -44,7 +45,7 @@ class Comments extends React.Component {
                 addComment={this.props.addComment}
                 removeComment={this.props.removeComment}
               />
-            )
+            );
           }
         })}
         <form
@@ -56,7 +57,11 @@ class Comments extends React.Component {
           <input type="text" ref="comment" placeholder="comment" />
           <input type="submit" hidden />
         </form>
-        <span className='show' onClick={this.handleClick}>{(this.state.top) ? "Show More..." : "Show Less..."}</span>
+        <More
+          numberOfComments={this.props.postComments.length}
+          handleClick={this.handleClick}
+          top={this.state.top}
+        />
       </div>
     );
   }
