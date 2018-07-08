@@ -1,16 +1,16 @@
-export function addComment(postId, author, comment) {
-  return {
-    type: "ADD_COMMENT",
-    postId,
-    author,
-    comment
-  };
+export function addComment(state, payload) {
+  return [
+    {
+      user: payload.author,
+      text: payload.comment
+    },
+    ...state
+  ];
 }
 
-export function removeComment(postId, i) {
-  return {
-    type: "REMOVE_COMMENT",
-    i,
-    postId
-  };
+export function deleteComment(state, payload) {
+  return [
+    ...state.slice(0, payload.index),
+    ...state.slice(payload.index + 1)
+  ];
 }

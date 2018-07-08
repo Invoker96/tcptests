@@ -6,17 +6,46 @@ import More from "./More";
 class Comments extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { top: true };
+    this.state = {
+      top: true,
+      author: "",
+      comment: ""
+    };
     this.handleClick = e => {
       e.preventDefault();
       this.setState({ top: !this.state.top });
     };
+    this.handleChangeAuthor = e => {
+      this.setState({
+        author: e.target.value
+      });
+    };
+    this.handleChangeComment = e => {
+      this.setState({
+        comment: e.target.value
+      });
+    };
     this.handleSubmit = e => {
       e.preventDefault();
-      const author = this.refs.author.value;
-      const comment = this.refs.comment.value;
-      this.props.addComment(this.props.postId, author, comment);
-      this.refs.commentForm.reset();
+      this.props.addComment(
+        this.props.postId,
+        this.state.author,
+        this.state.comment
+      );
+      console.log(this.state);
+      e.target.reset();
+    };
+    this.handleUpdate = (e, postId, i) => {
+      const target = e.target.parentNode.children;
+      const form =
+        e.target.parentNode.parentNode.parentNode.children["submitComments"];
+        form["author"].value=target["user"].textContent;
+        form["comment"].value=target["comment"].textContent;
+        this.setState({
+          author: target["user"].textContent,
+          comment: target["comment"].textContent
+        });
+        this.props.removeComment(postId, i)
     };
   }
 
@@ -33,6 +62,8 @@ class Comments extends React.Component {
                 postId={this.props.postId}
                 addComment={this.props.addComment}
                 removeComment={this.props.removeComment}
+                editComment={this.props.editComment}
+                handleUpdate={this.handleUpdate}
               />
             );
           } else {
@@ -44,17 +75,29 @@ class Comments extends React.Component {
                 postId={this.props.postId}
                 addComment={this.props.addComment}
                 removeComment={this.props.removeComment}
+                editComment={this.props.editComment}
+                handleUpdate={this.handleUpdate}
               />
             );
           }
         })}
         <form
-          ref="commentForm"
           className="comment-form"
+          name="submitComments"
           onSubmit={this.handleSubmit}
         >
-          <input type="text" ref="author" placeholder="author" />
-          <input type="text" ref="comment" placeholder="comment" />
+          <input
+            type="text"
+            onChange={this.handleChangeAuthor}
+            name="author"
+            placeholder="author"
+          />
+          <input
+            type="text"
+            onChange={this.handleChangeComment}
+            name="comment"
+            placeholder="comment"
+          />
           <input type="submit" hidden />
         </form>
         <More

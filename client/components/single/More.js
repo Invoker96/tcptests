@@ -8,7 +8,6 @@ const More = props => {
       </span>
     );
   }
-  console.log(props.numberOfComments);
   return null;
 };
 
