@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import CSSTransitionGroup from "react-addons-css-transition-group";
+import C from "../../data/constants"
 
 class Photo extends React.Component {
   render() {
@@ -8,7 +9,7 @@ class Photo extends React.Component {
     return (
       <figure className="grid-figure">
         <div className="grid-photo-wrap">
-          <Link to={`/view/${post.code}`}>
+          <Link to={`${C.LINK_TO_GALLERY}/${post.code}`}>
             <img
               src={post.display_src}
               alt={post.caption}
