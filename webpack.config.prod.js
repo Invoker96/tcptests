@@ -1,11 +1,11 @@
 var path = require('path');
-var webpack = require('webpack');
+var webpack = require('C:/Users/PRIYATANDON/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/webpack');
 
 module.exports = {
   devtool: 'source-map',
   entry: [
     
-    './client/reduxstagram'
+    './client/gitHub'
   ],
   output: {
     path: path.join(__dirname, 'dist'),

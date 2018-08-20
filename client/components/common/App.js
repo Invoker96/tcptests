@@ -1,15 +1,17 @@
+import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as commentActions from "../../actionCreator/comments";
-import * as postActions from "../../actionCreator/posts";
-import Main from "./Main";
+import * as commentActions from "../../actionCreator/closedIssues";
+import * as postActions from "../../actionCreator/openedIssues";
+import Main from "./main";
 
 const actionCreators = {...commentActions, ...postActions}
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts,
-    comments: state.comments
+    openedIssues:state.openedIssues,
+    closedIssues:state.closedIssues,
+    // IssueComment:state.IssueComment
   };
 }
 
